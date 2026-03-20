@@ -90,6 +90,12 @@ animation: pulse 1.2s ease-in-out infinite; margin-right: 3px; vertical-align: m
 .spinning { display: inline-block; animation: spin 1s linear infinite; }
 
 .timestamp { text-align: center; margin-top: 20px; font-size: 10px; color: #1e293b; letter-spacing: 1px; text-transform: uppercase; }
+
+@media (max-width: 500px) {
+  .bracket-group { flex-direction: column; gap: 6px; }
+  .connector { display: none; }
+  .r2-wrap { padding-left: 0; }
+}
 </style>
 
 </head>
@@ -168,7 +174,7 @@ function teamSlot(t) {
   return `
     <div class="team-slot ${statusClass}" data-abbrs="${(t.abbrs||[]).join(',')}">
       <div class="seed-row"><span class="seed-num">${t.seed}</span><span class="team-name">${t.name}</span></div>
-      <div class="owner-row">${ownerPill(t.owner, t.ownerExtra||'')}${t.spread ? `<span class="spread">${t.spread}</span>` : ''}</div>
+      <div class="owner-row">${ownerPill(t.owner, t.ownerExtra||'')}${t.spread && !['winner','loser'].includes(statusClass) ? `<span class="spread">${t.spread}</span>` : ''}</div>
       ${scoreHtml}
       ${t.xferNote ? `<div class="xfer-note">${t.xferNote}</div>` : ''}
     </div>`;

@@ -27,69 +27,74 @@ letter-spacing: 1px; display: flex; align-items: center; gap: 5px; font-family: 
 .legend { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
 .legend span { font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 99px; letter-spacing: 0.5px; }
 
+/* ── Region grid ── */
 .regions { display: grid; grid-template-columns: 1fr; gap: 14px; max-width: 1300px; margin: 0 auto; }
 @media (min-width: 700px) { .regions { grid-template-columns: 1fr 1fr; } }
 
 .region { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; overflow: hidden; }
 .region-hdr { padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
 .region-hdr .name { font-family: ‘Bebas Neue’, sans-serif; font-size: 18px; letter-spacing: 3px; }
-.region-hdr .sub { font-size: 10px; opacity: 0.5; letter-spacing: 1px; }
-.east-hdr   { background: linear-gradient(90deg,#1e3a5f,#0f172a); border-bottom: 2px solid #3b82f6; color: #93c5fd; }
-.west-hdr   { background: linear-gradient(90deg,#1a3328,#0f172a); border-bottom: 2px solid #22c55e; color: #86efac; }
-.south-hdr  { background: linear-gradient(90deg,#3d1515,#0f172a); border-bottom: 2px solid #ef4444; color: #fca5a5; }
-.midwest-hdr{ background: linear-gradient(90deg,#2d1a00,#0f172a); border-bottom: 2px solid #f97316; color: #fdba74; }
+.region-hdr .sub  { font-size: 10px; opacity: 0.5; letter-spacing: 1px; }
+.east-hdr    { background: linear-gradient(90deg,#1e3a5f,#0f172a); border-bottom: 2px solid #3b82f6; color: #93c5fd; }
+.west-hdr    { background: linear-gradient(90deg,#1a3328,#0f172a); border-bottom: 2px solid #22c55e; color: #86efac; }
+.south-hdr   { background: linear-gradient(90deg,#3d1515,#0f172a); border-bottom: 2px solid #ef4444; color: #fca5a5; }
+.midwest-hdr { background: linear-gradient(90deg,#2d1a00,#0f172a); border-bottom: 2px solid #f97316; color: #fdba74; }
 
-.bracket-group { display: flex; align-items: stretch; padding: 6px 8px;
-border-bottom: 1px solid rgba(255,255,255,0.04); gap: 0; }
-.bracket-group:last-child { border-bottom: none; }
+/* ── Bracket layout ── */
+.bracket-body { display: flex; align-items: flex-start; overflow-x: auto; padding: 6px 6px 10px; }
+.bracket-body::-webkit-scrollbar { height: 4px; }
+.bracket-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
 
-.r1-stack { flex: 1.3; display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.round-label-bar { height: 20px; font-size: 7px; font-weight: 800; letter-spacing: 2px;
+color: #334155; text-align: center; text-transform: uppercase; line-height: 20px; }
 
-.connector { width: 13px; flex-shrink: 0; display: flex; flex-direction: column; align-self: stretch; }
-.c-top { flex: 1; border-right: 2px solid rgba(255,255,255,0.2); border-bottom: 2px solid rgba(255,255,255,0.2); border-bottom-right-radius: 2px; }
-.c-bot { flex: 1; border-right: 2px solid rgba(255,255,255,0.2); }
-
-.r2-wrap { flex: 1; display: flex; align-items: center; padding-left: 5px; min-width: 0; }
-
+/* ── Matchup cards ── */
 .matchup { border: 2px solid rgba(255,255,255,0.12); border-radius: 8px; overflow: hidden; width: 100%; }
-.matchup.r2 { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.03); }
-.matchup.tbd { border: 2px dashed rgba(255,255,255,0.1); background: rgba(255,255,255,0.01); }
+.matchup.adv  { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.03); }
+.matchup.tbd  { border: 2px dashed rgba(255,255,255,0.08); background: transparent; }
+.tbd-inner { padding: 12px 6px; text-align: center; color: #1e293b; font-size: 9px; font-weight: 700; line-height: 1.6; }
+.r2-meta { padding: 3px 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.r2-label { font-size: 7px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #475569; }
+.r2-time  { font-size: 7px; color: #64748b; padding-bottom: 2px; }
 
-.tbd-inner { padding: 14px 10px; text-align: center; color: #334155; font-size: 10px; font-weight: 600; line-height: 1.6; }
-
-.r2-meta { padding: 3px 10px 0; }
-.r2-label { font-size: 8px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #475569; }
-.r2-time  { font-size: 8px; color: #64748b; padding-bottom: 2px; }
-
-.team-slot { padding: 7px 10px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+/* ── Team slots ── */
+.team-slot { padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,0.06); overflow: hidden; }
 .team-slot:last-child { border-bottom: none; }
-.team-slot.winner  { background: rgba(74,222,128,0.05); }
-.team-slot.loser   { background: rgba(0,0,0,0.2); opacity: 0.5; }
+.team-slot.winner   { background: rgba(74,222,128,0.05); }
+.team-slot.loser    { background: rgba(0,0,0,0.2); opacity: 0.55; }
 .team-slot.upcoming { background: rgba(255,255,255,0.02); }
-.team-slot.live    { background: rgba(239,68,68,0.07); }
+.team-slot.live     { background: rgba(239,68,68,0.07); }
 
-.seed-row { display: flex; align-items: baseline; gap: 4px; margin-bottom: 2px; }
-.seed-num { font-size: 8px; font-weight: 700; color: #64748b; background: rgba(255,255,255,0.07); padding: 1px 3px; border-radius: 3px; }
-.team-name { font-size: 11px; font-weight: 700; color: #f1f5f9; }
+.seed-row { display: flex; align-items: baseline; gap: 3px; margin-bottom: 1px; }
+.seed-num { font-size: 7px; font-weight: 700; color: #64748b; background: rgba(255,255,255,0.07);
+padding: 1px 3px; border-radius: 3px; flex-shrink: 0; }
+.team-name { font-size: 10px; font-weight: 700; color: #f1f5f9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-.owner-row { display: flex; align-items: center; gap: 4px; margin-bottom: 2px; flex-wrap: wrap; }
-.owner { font-size: 8px; font-weight: 700; padding: 1px 6px; border-radius: 99px; }
-.spread { font-size: 8px; font-weight: 600; color: #94a3b8; background: rgba(255,255,255,0.06); padding: 1px 5px; border-radius: 4px; }
+.owner-row { display: flex; align-items: center; gap: 3px; margin-bottom: 1px; overflow: hidden; flex-wrap: nowrap; }
+.owner  { font-size: 7px; font-weight: 700; padding: 1px 5px; border-radius: 99px; white-space: nowrap; }
+.spread { font-size: 7px; font-weight: 600; color: #94a3b8; background: rgba(255,255,255,0.06);
+padding: 1px 4px; border-radius: 4px; white-space: nowrap; }
 
-.score-row { font-family: ‘Bebas Neue’, sans-serif; font-size: 13px; letter-spacing: 1px; color: #fff; }
+.score-row { font-family: ‘Bebas Neue’, sans-serif; font-size: 12px; letter-spacing: 1px; white-space: nowrap; }
 .ftag { font-family: ‘Inter’, sans-serif; font-size: 7px; color: #475569; font-weight: 600; margin-left: 3px; }
-.xfer-note { font-size: 7px; color: #fb923c; margin-top: 1px; }
-.game-time { font-size: 8px; color: #475569; margin-top: 1px; }
+.game-time { font-size: 7px; color: #475569; }
 .live-score { color: #f87171; }
-.live-clock { font-size: 8px; color: #ef4444; margin-left: 4px; font-family: ‘Inter’, sans-serif; }
+.live-clock { font-size: 7px; color: #ef4444; margin-left: 3px; font-family: ‘Inter’, sans-serif; }
 
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
-.live-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #ef4444;
-animation: pulse 1.2s ease-in-out infinite; margin-right: 3px; vertical-align: middle; }
+.live-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #ef4444;
+animation: pulse 1.2s ease-in-out infinite; margin-right: 2px; vertical-align: middle; }
 @keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
 .spinning { display: inline-block; animation: spin 1s linear infinite; }
 
-.timestamp { text-align: center; margin-top: 20px; font-size: 10px; color: #1e293b; letter-spacing: 1px; text-transform: uppercase; }
+/* ── Final Four ── */
+.ff-section { max-width: 1300px; margin: 20px auto 0; }
+.ff-title { text-align: center; font-family: ‘Bebas Neue’, sans-serif; font-size: 22px;
+letter-spacing: 4px; color: #fbbf24; margin-bottom: 10px; }
+.ff-bracket { display: flex; justify-content: center; overflow-x: auto; padding: 0 10px 10px; }
+
+.timestamp { text-align: center; margin-top: 20px; font-size: 10px; color: #1e293b;
+letter-spacing: 1px; text-transform: uppercase; }
 </style>
 
 </head>
@@ -98,7 +103,7 @@ animation: pulse 1.2s ease-in-out infinite; margin-right: 3px; vertical-align: m
 <div class="header">
   <div class="eyebrow">2026 NCAA Tournament</div>
   <div class="title">🏀 Pool Bracket</div>
-  <div class="subtitle">Round 1 → Round 2 · Ownership · Spreads · Results</div>
+  <div class="subtitle">Round 1 → Championship · Ownership · Spreads · Results</div>
 </div>
 
 <div class="toolbar">
@@ -116,417 +121,588 @@ animation: pulse 1.2s ease-in-out infinite; margin-right: 3px; vertical-align: m
 </div>
 
 <div class="regions" id="bracket"></div>
+
+<div class="ff-section" id="ff-section" style="display:none">
+  <div class="ff-title">🏀 Final Four &amp; Championship</div>
+  <div class="ff-bracket" id="ff-bracket"></div>
+</div>
+
 <div class="timestamp" id="timestamp">Last Updated: Friday, March 20, 2026</div>
 
 <script>
-// ─────────────────────────────────────────────
-// PLAYER COLOR MAP
-// ─────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// LAYOUT CONSTANTS
+// BASE_H: fixed pixel height per team slot — controls bracket line alignment.
+// If you increase font sizes significantly, bump this up by ~8px.
+// ─────────────────────────────────────────────────────────────
+const BASE_H  = 56;   // px per team slot
+const COL_W   = 152;  // px per round column
+const CONN_W  = 15;   // px per connector
+const LABEL_H = 20;   // px for round label bar
+
+// containerH: total px height allocated to one matchup at a given round index.
+// R1 (idx 0) = 112px, R2 = 224px, S16 = 448px, E8 = 896px
+function containerH(idx) { return 2 * BASE_H * Math.pow(2, idx); }
+
+// ─────────────────────────────────────────────────────────────
+// PLAYER COLORS
+// ─────────────────────────────────────────────────────────────
 const PLAYERS = {
-  christian: { bg:"rgba(59,130,246,0.2)",  color:"#93c5fd", border:"rgba(59,130,246,0.3)" },
-  paul:      { bg:"rgba(239,68,68,0.2)",   color:"#fca5a5", border:"rgba(239,68,68,0.3)" },
-  david:     { bg:"rgba(34,197,94,0.2)",   color:"#86efac", border:"rgba(34,197,94,0.3)" },
-  travis:    { bg:"rgba(249,115,22,0.2)",  color:"#fdba74", border:"rgba(249,115,22,0.3)" },
+  christian: { bg:"rgba(59,130,246,0.2)",  color:"#93c5fd", border:"rgba(59,130,246,0.3)"  },
+  paul:      { bg:"rgba(239,68,68,0.2)",   color:"#fca5a5", border:"rgba(239,68,68,0.3)"   },
+  david:     { bg:"rgba(34,197,94,0.2)",   color:"#86efac", border:"rgba(34,197,94,0.3)"   },
+  travis:    { bg:"rgba(249,115,22,0.2)",  color:"#fdba74", border:"rgba(249,115,22,0.3)"  },
   payton:    { bg:"rgba(129,140,248,0.2)", color:"#c7d2fe", border:"rgba(129,140,248,0.3)" },
   colby:     { bg:"rgba(134,239,172,0.2)", color:"#bbf7d0", border:"rgba(134,239,172,0.3)" },
   gordon:    { bg:"rgba(232,121,249,0.2)", color:"#f0abfc", border:"rgba(232,121,249,0.3)" },
   nick:      { bg:"rgba(103,232,249,0.2)", color:"#a5f3fc", border:"rgba(103,232,249,0.3)" },
-  quinn:     { bg:"rgba(253,224,71,0.2)",  color:"#fef08a", border:"rgba(253,224,71,0.3)" },
+  quinn:     { bg:"rgba(253,224,71,0.2)",  color:"#fef08a", border:"rgba(253,224,71,0.3)"  },
   danny:     { bg:"rgba(252,165,165,0.2)", color:"#fecaca", border:"rgba(252,165,165,0.3)" },
   legrand:   { bg:"rgba(110,231,183,0.2)", color:"#a7f3d0", border:"rgba(110,231,183,0.3)" },
-  wade:      { bg:"rgba(252,211,77,0.2)",  color:"#fde68a", border:"rgba(252,211,77,0.3)" },
+  wade:      { bg:"rgba(252,211,77,0.2)",  color:"#fde68a", border:"rgba(252,211,77,0.3)"  },
   lance:     { bg:"rgba(165,180,252,0.2)", color:"#e0e7ff", border:"rgba(165,180,252,0.3)" },
   matt:      { bg:"rgba(240,171,252,0.2)", color:"#f5d0fe", border:"rgba(240,171,252,0.3)" },
-  dean:      { bg:"rgba(52,211,153,0.2)",  color:"#6ee7b7", border:"rgba(52,211,153,0.3)" },
+  dean:      { bg:"rgba(52,211,153,0.2)",  color:"#6ee7b7", border:"rgba(52,211,153,0.3)"  },
   vaine:     { bg:"rgba(253,186,116,0.2)", color:"#fed7aa", border:"rgba(253,186,116,0.3)" },
   legrande:  { bg:"rgba(110,231,183,0.2)", color:"#a7f3d0", border:"rgba(110,231,183,0.3)" },
 };
 
-function playerStyle(name) {
-  const key = name.toLowerCase().replace(/\s+/g,'').replace('matts','matt').replace('legrand','legrand');
-  return PLAYERS[key] || PLAYERS[key.replace('s','')] || { bg:"rgba(100,100,100,0.2)", color:"#aaa", border:"rgba(100,100,100,0.3)" };
+function pStyle(name) {
+  const k = name.toLowerCase().replace(/\s+/g,'').replace('matts','matt');
+  return PLAYERS[k] || PLAYERS[k.replace(/s$/,'')] || { bg:"rgba(100,100,100,0.2)", color:"#aaa", border:"rgba(100,100,100,0.3)" };
 }
-
 function ownerPill(name, extra='') {
-  const s = playerStyle(name);
+  const s = pStyle(name);
   return `<span class="owner" style="background:${s.bg};color:${s.color};border:1px solid ${s.border}">${name}${extra ? ' '+extra : ''}</span>`;
 }
 
-// ─────────────────────────────────────────────
-// TEAM SLOT RENDERER
-// ─────────────────────────────────────────────
-function teamSlot(t) {
-  const statusClass = t.status || 'upcoming';
-  let scoreHtml = '';
-  if (t.liveScore != null) {
-    scoreHtml = `<div class="score-row live-score"><span class="live-dot"></span>${t.liveScore}–${t.liveOppScore}<span class="live-clock">${t.liveClock || ''}</span></div>`;
-  } else if (t.score != null) {
-    scoreHtml = `<div class="score-row">${t.score}<span class="ftag">${t.tag||''}</span></div>`;
-  } else if (t.gameTime) {
-    scoreHtml = `<div class="game-time">${t.gameTime}</div>`;
-  }
-  return `
-    <div class="team-slot ${statusClass}" data-abbrs="${(t.abbrs||[]).join(',')}">
-      <div class="seed-row"><span class="seed-num">${t.seed}</span><span class="team-name">${t.name}</span></div>
-      <div class="owner-row">${ownerPill(t.owner, t.ownerExtra||'')}${t.spread ? `<span class="spread">${t.spread}</span>` : ''}</div>
-      ${scoreHtml}
-      ${t.xferNote ? `<div class="xfer-note">${t.xferNote}</div>` : ''}
-    </div>`;
-}
+// ─────────────────────────────────────────────────────────────
+// MASTER TEAM REGISTRY
+// Each team defined once. r1Spread shown in R1 column;
+// R2+ spreads are fetched live from ESPN.
+// abbrs[0] = primary ESPN abbreviation used for score/spread matching.
+// ─────────────────────────────────────────────────────────────
+const T = {
+  // ── EAST ──────────────────────────────────────────────────
+  DUKE: { seed:1,  name:"Duke",            owner:"Colby",     ownerExtra:"🆕", abbrs:["DUKE"],        r1Spread:"−27.5" },
+  SIE:  { seed:16, name:"Siena",           owner:"Colby",                      abbrs:["SIE"],         r1Spread:"+27.5" },
+  OSU:  { seed:8,  name:"Ohio State",      owner:"Danny",                      abbrs:["OSU"],         r1Spread:"−2.5"  },
+  TCU:  { seed:9,  name:"TCU",             owner:"Quinn",                      abbrs:["TCU"],         r1Spread:"+2.5"  },
+  SJU:  { seed:5,  name:"St. John's",      owner:"Travis",                     abbrs:["SJU"],         r1Spread:"−9.5"  },
+  UNI:  { seed:12, name:"Northern Iowa",   owner:"Vaine",                      abbrs:["UNI"],         r1Spread:"+9.5"  },
+  KU:   { seed:4,  name:"Kansas",          owner:"Payton",                     abbrs:["KU"],          r1Spread:"−13.5" },
+  CBU:  { seed:13, name:"Cal Baptist",     owner:"Nick",                       abbrs:["CBU"],         r1Spread:"+13.5" },
+  LOU:  { seed:6,  name:"Louisville",      owner:"Paul",      ownerExtra:"🆕", abbrs:["LOU"],         r1Spread:"−6.5"  },
+  USF:  { seed:11, name:"South Florida",   owner:"Paul",                       abbrs:["USF"],         r1Spread:"+6.5"  },
+  MSU:  { seed:3,  name:"Michigan St.",    owner:"LeGrand",                    abbrs:["MSU"],         r1Spread:"−16.5" },
+  NDSU: { seed:14, name:"N. Dakota St.",   owner:"Lance",                      abbrs:["NDSU"],        r1Spread:"+16.5" },
+  UCLA: { seed:7,  name:"UCLA",            owner:"Gordon",                     abbrs:["UCLA"],        r1Spread:"−5.5"  },
+  UCF:  { seed:10, name:"UCF",             owner:"Wade",                       abbrs:["UCF"],         r1Spread:"+5.5"  },
+  CONN: { seed:2,  name:"UConn",           owner:"David",                      abbrs:["CONN"],        r1Spread:"−20.5" },
+  FUR:  { seed:15, name:"Furman",          owner:"Christian",                  abbrs:["FUR","FURM"],  r1Spread:"+20.5" },
+  // ── WEST ──────────────────────────────────────────────────
+  ARIZ: { seed:1,  name:"Arizona",         owner:"Travis",                     abbrs:["ARIZ"],        r1Spread:"−27.5" },
+  LIU:  { seed:16, name:"LIU",             owner:"Payton",                     abbrs:["LIU"],         r1Spread:"+27.5" },
+  VILL: { seed:8,  name:"Villanova",       owner:"Colby",                      abbrs:["VILL"],        r1Spread:"−1.5"  },
+  USU:  { seed:9,  name:"Utah State",      owner:"Gordon",                     abbrs:["USU"],         r1Spread:"+1.5"  },
+  WIS:  { seed:5,  name:"Wisconsin",       owner:"Nick",                       abbrs:["WIS"],         r1Spread:"−9.5"  },
+  HP:   { seed:12, name:"High Point",      owner:"Quinn",                      abbrs:["HP","HPU"],    r1Spread:"+9.5"  },
+  ARK:  { seed:4,  name:"Arkansas",        owner:"Christian",                  abbrs:["ARK"],         r1Spread:"−15.5" },
+  HAW:  { seed:13, name:"Hawai'i",         owner:"Danny",                      abbrs:["HAW"],         r1Spread:"+15.5" },
+  BYU:  { seed:6,  name:"BYU",             owner:"Legrande",                   abbrs:["BYU"],         r1Spread:"−1.5"  },
+  TEX:  { seed:11, name:"Texas",           owner:"Wade",                       abbrs:["TEX","UTEX"],  r1Spread:"+1.5"  },
+  GONZ: { seed:3,  name:"Gonzaga",         owner:"Lance",     ownerExtra:"🆕", abbrs:["GONZ"],        r1Spread:"−18.5" },
+  KENN: { seed:14, name:"Kennesaw St.",    owner:"Lance",                      abbrs:["KENN"],        r1Spread:"+18.5" },
+  MIA:  { seed:7,  name:"Miami (FL)",      owner:"Matt S",                     abbrs:["MIA"],         r1Spread:"−1.5"  },
+  MIZZ: { seed:10, name:"Missouri",        owner:"Dean",                       abbrs:["MIZZ"],        r1Spread:"+1.5"  },
+  PUR:  { seed:2,  name:"Purdue",          owner:"Vaine",                      abbrs:["PUR"],         r1Spread:"−24.5" },
+  QUC:  { seed:15, name:"Queens",          owner:"David",                      abbrs:["QUC"],         r1Spread:"+24.5" },
+  // ── SOUTH ─────────────────────────────────────────────────
+  FLA:  { seed:1,  name:"Florida",          owner:"Travis",                    abbrs:["FLA"],         r1Spread:"−35.5" },
+  PVAM: { seed:16, name:"Prairie View A&M", owner:"Christian", ownerExtra:"🆕",abbrs:["PV","PVAM"],   r1Spread:"+35.5" },
+  CLEM: { seed:8,  name:"Clemson",          owner:"Gordon",                    abbrs:["CLEM"],        r1Spread:"+2.5"  },
+  IOWA: { seed:9,  name:"Iowa",             owner:"Payton",                    abbrs:["IOWA"],        r1Spread:"−2.5"  },
+  VAN:  { seed:5,  name:"Vanderbilt",       owner:"LeGrand",                   abbrs:["VAN"],         r1Spread:"−11.5" },
+  MCNS: { seed:12, name:"McNeese",          owner:"Colby",                     abbrs:["MCNS"],        r1Spread:"+11.5" },
+  NEB:  { seed:4,  name:"Nebraska",         owner:"Quinn",                     abbrs:["NEB"],         r1Spread:"−13.5" },
+  TROY: { seed:13, name:"Troy",             owner:"Wade",                      abbrs:["TROY"],        r1Spread:"+13.5" },
+  UNC:  { seed:6,  name:"N. Carolina",      owner:"Paul",                      abbrs:["UNC"],         r1Spread:"−2.5"  },
+  VCU:  { seed:11, name:"VCU",              owner:"David",                     abbrs:["VCU"],         r1Spread:"+2.5"  },
+  ILL:  { seed:3,  name:"Illinois",         owner:"Lance",                     abbrs:["ILL"],         r1Spread:"−25.5" },
+  PENN: { seed:14, name:"Penn",             owner:"Nick",                      abbrs:["PENN"],        r1Spread:"+25.5" },
+  SMC:  { seed:7,  name:"Saint Mary's",     owner:"Dean",                      abbrs:["SMC"],         r1Spread:"−3.5"  },
+  TXAM: { seed:10, name:"Texas A&M",        owner:"Danny",                     abbrs:["TXAM","TAM"],  r1Spread:"+3.5"  },
+  HOU:  { seed:2,  name:"Houston",          owner:"Matt S",                    abbrs:["HOU"],         r1Spread:"−22.5" },
+  IDHO: { seed:15, name:"Idaho",            owner:"Vaine",                     abbrs:["IDHO"],        r1Spread:"+22.5" },
+  // ── MIDWEST ───────────────────────────────────────────────
+  MICH: { seed:1,  name:"Michigan",         owner:"David",     ownerExtra:"🆕",abbrs:["MICH"],        r1Spread:"−30.5" },
+  HOW:  { seed:16, name:"Howard",           owner:"David",                     abbrs:["HOW"],         r1Spread:"+30.5" },
+  UGA:  { seed:8,  name:"Georgia",          owner:"Christian",                 abbrs:["UGA"],         r1Spread:"−2.5"  },
+  SLU:  { seed:9,  name:"Saint Louis",      owner:"Wade",                      abbrs:["SLU"],         r1Spread:"+2.5"  },
+  TTU:  { seed:5,  name:"Texas Tech",       owner:"Quinn",                     abbrs:["TTU"],         r1Spread:"−7.5"  },
+  AKR:  { seed:12, name:"Akron",            owner:"Gordon",                    abbrs:["AKR"],         r1Spread:"+7.5"  },
+  ALA:  { seed:4,  name:"Alabama",          owner:"Travis",                    abbrs:["ALA"],         r1Spread:"−12.5" },
+  HOF:  { seed:13, name:"Hofstra",          owner:"Colby",                     abbrs:["HOF"],         r1Spread:"+12.5" },
+  TENN: { seed:6,  name:"Tennessee",        owner:"Paul",                      abbrs:["TENN"],        r1Spread:"−8.5"  },
+  MOH:  { seed:11, name:"Miami (OH)",       owner:"Danny",                     abbrs:["M-OH"],        r1Spread:"+8.5"  },
+  UVA:  { seed:3,  name:"Virginia",         owner:"Payton",                    abbrs:["UVA"],         r1Spread:"−25.5" },
+  WRST: { seed:14, name:"Wright State",     owner:"Nick",                      abbrs:["WRST"],        r1Spread:"+25.5" },
+  UK:   { seed:7,  name:"Kentucky",         owner:"Lance",                     abbrs:["UK"],          r1Spread:"−3.5"  },
+  SCU:  { seed:10, name:"Santa Clara",      owner:"Dean",                      abbrs:["SCU"],         r1Spread:"+3.5"  },
+  ISU:  { seed:2,  name:"Iowa State",       owner:"Vaine",                     abbrs:["ISU"],         r1Spread:"−23.5" },
+  TNST: { seed:15, name:"Tennessee St.",    owner:"Legrande",                  abbrs:["TNST","TSU"],  r1Spread:"+23.5" },
+};
 
-// ─────────────────────────────────────────────
-// MATCHUP RENDERER
-// ─────────────────────────────────────────────
-function matchupHtml(teams, opts={}) {
-  if (opts.tbd) return `<div class="matchup tbd"><div class="tbd-inner">⏳ Pending<br>upcoming games</div></div>`;
-  const r2Meta = opts.isR2 ? `<div class="r2-meta"><div class="r2-label">ROUND 2</div><div class="r2-time">${opts.r2Time||''}</div></div>` : '';
-  return `<div class="matchup${opts.isR2?' r2':''}">${r2Meta}${teams.map(teamSlot).join('')}</div>`;
-}
+// ─────────────────────────────────────────────────────────────
+// RESULTS  ← UPDATE THIS EACH ROUND
+//
+// Keys: r1, r2, r3, r4, ff (Final Four semis), ch (Championship)
+// Per team: { score, oppScore, status: 'winner'|'loser', tag? }
+// Only add entries for COMPLETED games. Skip upcoming (they stay grey).
+//
+// Tags to use:
+//   '✅ COVERED (+N)'   winner covered the spread
+//   '🎉 UPSET WIN'      lower seed won
+//   '⇌ XFER — ...'     ownership transferred
+//   '❌ ELIM'           standard loss
+//   '❌ ELIM (no cover)' lost or won without covering
+// ─────────────────────────────────────────────────────────────
+const RESULTS = {
+  r1: {
+    // ── EAST ──
+    DUKE: { score:'71',  oppScore:'65',  status:'winner', tag:'⇌ XFER — Matt S didn\'t cover' },
+    SIE:  { score:'65',  oppScore:'71',  status:'loser',  tag:'❌ ELIM'                        },
+    OSU:  { score:'64',  oppScore:'66',  status:'loser',  tag:'❌ ELIM'                        },
+    TCU:  { score:'66',  oppScore:'64',  status:'winner', tag:'🎉 UPSET WIN'                   },
+    LOU:  { score:'83',  oppScore:'79',  status:'winner', tag:'⇌ XFER — Dean didn\'t cover'   },
+    USF:  { score:'79',  oppScore:'83',  status:'loser',  tag:'❌ ELIM'                        },
+    MSU:  { score:'92',  oppScore:'67',  status:'winner', tag:'✅ COVERED (+25)'               },
+    NDSU: { score:'67',  oppScore:'92',  status:'loser',  tag:'❌ ELIM'                        },
+    // ── WEST ──
+    WIS:  { score:'82',  oppScore:'83',  status:'loser',  tag:'❌ ELIM (no cover)'             },
+    HP:   { score:'83',  oppScore:'82',  status:'winner', tag:'🎉 UPSET WIN'                   },
+    ARK:  { score:'97',  oppScore:'78',  status:'winner', tag:'✅ COVERED (+19)'               },
+    HAW:  { score:'78',  oppScore:'97',  status:'loser',  tag:'❌ ELIM'                        },
+    BYU:  { score:'71',  oppScore:'79',  status:'loser',  tag:'❌ ELIM'                        },
+    TEX:  { score:'79',  oppScore:'71',  status:'winner', tag:'🎉 UPSET WIN'                   },
+    GONZ: { score:'73',  oppScore:'64',  status:'winner', tag:'⇌ XFER — Paul didn\'t cover'   },
+    KENN: { score:'64',  oppScore:'73',  status:'loser',  tag:'❌ ELIM'                        },
+    // ── SOUTH ──
+    VAN:  { score:'78',  oppScore:'68',  status:'winner', tag:'✅ COVERED (+10)'               },
+    MCNS: { score:'68',  oppScore:'78',  status:'loser',  tag:'❌ ELIM'                        },
+    NEB:  { score:'76',  oppScore:'47',  status:'winner', tag:'✅ COVERED (+29)'               },
+    TROY: { score:'47',  oppScore:'76',  status:'loser',  tag:'❌ ELIM'                        },
+    UNC:  { score:'78',  oppScore:'82',  status:'loser',  tag:'❌ ELIM'                        },
+    VCU:  { score:'82',  oppScore:'78',  status:'winner', tag:'🎉 UPSET WIN'                   },
+    ILL:  { score:'105', oppScore:'70',  status:'winner', tag:'✅ COVERED (+35)'               },
+    PENN: { score:'70',  oppScore:'105', status:'loser',  tag:'❌ ELIM'                        },
+    SMC:  { score:'50',  oppScore:'63',  status:'loser',  tag:'❌ ELIM'                        },
+    TXAM: { score:'63',  oppScore:'50',  status:'winner', tag:'🎉 UPSET WIN'                   },
+    HOU:  { score:'78',  oppScore:'47',  status:'winner', tag:'✅ COVERED (+31)'               },
+    IDHO: { score:'47',  oppScore:'78',  status:'loser',  tag:'❌ ELIM'                        },
+    // ── MIDWEST ──
+    MICH: { score:'101', oppScore:'80',  status:'winner', tag:'⇌ XFER — Matt S didn\'t cover' },
+    HOW:  { score:'80',  oppScore:'101', status:'loser',  tag:'❌ ELIM'                        },
+    UGA:  { score:'77',  oppScore:'102', status:'loser',  tag:'❌ ELIM'                        },
+    SLU:  { score:'102', oppScore:'77',  status:'winner', tag:'🎉 UPSET WIN'                   },
+  },
+  // ── Add R2 results here as games complete ──────────────────
+  // Example: DUKE: { score:'85', oppScore:'72', status:'winner', tag:'✅ COVERED (+8)' }
+  r2: {},
+  r3: {},   // Sweet 16
+  r4: {},   // Elite 8
+  ff: {},   // Final Four semis
+  ch: {},   // Championship
+};
 
-// ─────────────────────────────────────────────
-// BRACKET GROUP RENDERER
-// ─────────────────────────────────────────────
-function bracketGroup(g) {
-  const r2Html = g.r2tbd
-    ? matchupHtml([], {tbd:true})
-    : matchupHtml(g.r2||[], {isR2:true, r2Time:g.r2Time});
-  return `
-    <div class="bracket-group">
-      <div class="r1-stack">
-        ${matchupHtml(g.r1top)}
-        ${matchupHtml(g.r1bot)}
-      </div>
-      <div class="connector"><div class="c-top"></div><div class="c-bot"></div></div>
-      <div class="r2-wrap">${r2Html}</div>
-    </div>`;
-}
-
-// ─────────────────────────────────────────────
-// REGION RENDERER
-// ─────────────────────────────────────────────
-function regionHtml(title, sub, hdrClass, groups) {
-  return `
-    <div class="region">
-      <div class="region-hdr ${hdrClass}"><span class="name">${title}</span><span class="sub">${sub}</span></div>
-      ${groups.map(bracketGroup).join('')}
-    </div>`;
-}
-
-// ─────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
 // BRACKET DATA
-// ─────────────────────────────────────────────
+//
+// r1: Fixed — 8 matchups per region (1v16 … 2v15). Teams never change.
+//
+// times: Game times for future rounds, indexed by matchup slot.
+//   r2[0] = time for winner-of-r1[0] vs winner-of-r1[1]
+//   r2[1] = time for winner-of-r1[2] vs winner-of-r1[3]
+//   ...etc. Use null for TBD/unknown times.
+//
+// HOW TO UPDATE EACH ROUND — only two things needed:
+//   1. Add results to RESULTS.r2 (or r3/r4) — cards update visually
+//   2. (Optional) Add game times to times.r3 (or r4) — shows tip-off
+//
+// Teams auto-advance. No matchup arrays to build manually.
+// ─────────────────────────────────────────────────────────────
 const REGIONS = [
   {
-    title: "EAST", sub: "Buffalo · Greenville", hdr: "east-hdr",
-    groups: [
-      {
-        r1top: [
-          { seed:1,  name:"Duke",          owner:"Colby",    ownerExtra:"🆕", spread:"−27.5", score:"71", tag:"⇌ XFER — Matt S didn't cover", status:"winner", abbrs:["DUKE"] },
-          { seed:16, name:"Siena",          owner:"Colby",                                     score:"65", tag:"❌ ELIM", status:"loser",  abbrs:["SIE"] },
-        ],
-        r1bot: [
-          { seed:8,  name:"Ohio State",     owner:"Danny",                    spread:"−2.5",   score:"64", tag:"❌ ELIM", status:"loser",  abbrs:["OSU"] },
-          { seed:9,  name:"TCU",            owner:"Quinn",                    spread:"+2.5",   score:"66", tag:"🎉 UPSET WIN", status:"winner", abbrs:["TCU"] },
-        ],
-        r2: [
-          { seed:1, name:"Duke",   owner:"Colby", status:"upcoming", abbrs:["DUKE"] },
-          { seed:9, name:"TCU",    owner:"Quinn", status:"upcoming", abbrs:["TCU"] },
-        ],
-        r2Time: "Sat Mar 21 · 4:15 PM CDT",
-      },
-      {
-        r1top: [
-          { seed:5,  name:"St. John's",    owner:"Travis",  spread:"−9.5",  gameTime:"⏳ Fri 6:10 PM CDT", status:"upcoming", abbrs:["SJU"] },
-          { seed:12, name:"Northern Iowa", owner:"Vaine",   spread:"+9.5",  gameTime:"⏳ Fri 6:10 PM CDT", status:"upcoming", abbrs:["UNI"] },
-        ],
-        r1bot: [
-          { seed:4,  name:"Kansas",        owner:"Payton",  spread:"−13.5", gameTime:"⏳ Fri 8:45 PM CDT", status:"upcoming", abbrs:["KU"] },
-          { seed:13, name:"Cal Baptist",   owner:"Nick",    spread:"+13.5", gameTime:"⏳ Fri 8:45 PM CDT", status:"upcoming", abbrs:["CBU"] },
-        ],
-        r2tbd: true,
-      },
-      {
-        r1top: [
-          { seed:6,  name:"Louisville",    owner:"Paul",    ownerExtra:"🆕", spread:"−6.5",  score:"83", tag:"⇌ XFER — Dean didn't cover", status:"winner", abbrs:["LOU"] },
-          { seed:11, name:"South Florida", owner:"Paul",                                       score:"79", tag:"❌ ELIM", status:"loser",  abbrs:["USF"] },
-        ],
-        r1bot: [
-          { seed:3,  name:"Michigan St.",  owner:"LeGrand",                 spread:"−16.5", score:"92", tag:"✅ COVERED (+25)", status:"winner", abbrs:["MSU"] },
-          { seed:14, name:"N. Dakota St.", owner:"Lance",                   spread:"+16.5", score:"67", tag:"❌ ELIM", status:"loser",  abbrs:["NDSU"] },
-        ],
-        r2: [
-          { seed:3, name:"Michigan St.", owner:"LeGrand", status:"upcoming", abbrs:["MSU"] },
-          { seed:6, name:"Louisville",   owner:"Paul",    status:"upcoming", abbrs:["LOU"] },
-        ],
-        r2Time: "Sat Mar 21 · 1:45 PM CDT",
-      },
-      {
-        r1top: [
-          { seed:7,  name:"UCLA",  owner:"Gordon",    spread:"−5.5",  gameTime:"⏳ Fri 6:25 PM CDT", status:"upcoming", abbrs:["UCLA"] },
-          { seed:10, name:"UCF",   owner:"Wade",      spread:"+5.5",  gameTime:"⏳ Fri 6:25 PM CDT", status:"upcoming", abbrs:["UCF"] },
-        ],
-        r1bot: [
-          { seed:2,  name:"UConn", owner:"David",     spread:"−20.5", gameTime:"⏳ Fri 9:00 PM CDT", status:"upcoming", abbrs:["CONN"] },
-          { seed:15, name:"Furman",owner:"Christian", spread:"+20.5", gameTime:"⏳ Fri 9:00 PM CDT", status:"upcoming", abbrs:["FUR","FURM"] },
-        ],
-        r2tbd: true,
-      },
-    ]
+    title:"EAST", sub:"Buffalo · Greenville", hdr:"east-hdr",
+    r1:[
+      { teams:['DUKE','SIE']                                    },
+      { teams:['OSU','TCU']                                     },
+      { teams:['SJU','UNI'],  time:"⏳ Fri 6:10 PM CDT"        },
+      { teams:['KU','CBU'],   time:"⏳ Fri 8:45 PM CDT"        },
+      { teams:['LOU','USF']                                     },
+      { teams:['MSU','NDSU']                                    },
+      { teams:['UCLA','UCF'], time:"⏳ Fri 6:25 PM CDT"        },
+      { teams:['CONN','FUR'], time:"⏳ Fri 9:00 PM CDT"        },
+    ],
+    times: {
+      r2: ["Sat Mar 21 · 4:15 PM CDT", null, "Sat Mar 21 · 1:45 PM CDT", null],
+      r3: [], // ← fill in Sweet 16 times after R2 bracket sets
+      r4: [], // ← fill in Elite 8 time after S16
+    },
   },
   {
-    title: "WEST", sub: "Portland · San Jose", hdr: "west-hdr",
-    groups: [
-      {
-        r1top: [
-          { seed:1,  name:"Arizona",    owner:"Travis",  spread:"−27.5", gameTime:"⏳ Fri 12:35 PM CDT", status:"upcoming", abbrs:["ARIZ"] },
-          { seed:16, name:"LIU",        owner:"Payton",  spread:"+27.5", gameTime:"⏳ Fri 12:35 PM CDT", status:"upcoming", abbrs:["LIU"] },
-        ],
-        r1bot: [
-          { seed:8,  name:"Villanova",  owner:"Colby",   spread:"−1.5",  gameTime:"⏳ Fri 3:10 PM CDT",  status:"upcoming", abbrs:["VILL"] },
-          { seed:9,  name:"Utah State", owner:"Gordon",  spread:"+1.5",  gameTime:"⏳ Fri 3:10 PM CDT",  status:"upcoming", abbrs:["USU"] },
-        ],
-        r2tbd: true,
-      },
-      {
-        r1top: [
-          { seed:5,  name:"Wisconsin",  owner:"Nick",      spread:"−9.5",  score:"82", tag:"❌ ELIM (no cover)", status:"loser",  abbrs:["WIS"] },
-          { seed:12, name:"High Point", owner:"Quinn",     spread:"+9.5",  score:"83", tag:"🎉 UPSET WIN", status:"winner", abbrs:["HP"] },
-        ],
-        r1bot: [
-          { seed:4,  name:"Arkansas",   owner:"Christian", spread:"−15.5", score:"97", tag:"✅ COVERED (+19)", status:"winner", abbrs:["ARK"] },
-          { seed:13, name:"Hawai'i",    owner:"Danny",     spread:"+15.5", score:"78", tag:"❌ ELIM", status:"loser",  abbrs:["HAW"] },
-        ],
-        r2: [
-          { seed:4,  name:"Arkansas",   owner:"Christian", status:"upcoming", abbrs:["ARK"] },
-          { seed:12, name:"High Point", owner:"Quinn",     status:"upcoming", abbrs:["HP","HPU"] },
-        ],
-        r2Time: "Sat Mar 21 · 8:45 PM CDT",
-      },
-      {
-        r1top: [
-          { seed:6,  name:"BYU",            owner:"Legrande",               spread:"−1.5",  score:"71", tag:"❌ ELIM", status:"loser",  abbrs:["BYU"] },
-          { seed:11, name:"Texas",           owner:"Wade",                   spread:"+1.5",  score:"79", tag:"🎉 UPSET WIN", status:"winner", abbrs:["TEX"] },
-        ],
-        r1bot: [
-          { seed:3,  name:"Gonzaga",         owner:"Lance", ownerExtra:"🆕", spread:"−18.5", score:"73", tag:"⇌ XFER — Paul didn't cover", status:"winner", abbrs:["GONZ"] },
-          { seed:14, name:"Kennesaw St.",    owner:"Lance",                  spread:"+18.5", score:"64", tag:"❌ ELIM", status:"loser",  abbrs:["KENN"] },
-        ],
-        r2: [
-          { seed:3,  name:"Gonzaga", owner:"Lance", status:"upcoming", abbrs:["GONZ"] },
-          { seed:11, name:"Texas",   owner:"Wade",  status:"upcoming", abbrs:["TEX","UTEX"] },
-        ],
-        r2Time: "Sat Mar 21 · 6:10 PM CDT",
-      },
-      {
-        r1top: [
-          { seed:7,  name:"Miami (FL)", owner:"Matt S",  spread:"−1.5",  gameTime:"⏳ Fri 9:10 PM CDT", status:"upcoming", abbrs:["MIA"] },
-          { seed:10, name:"Missouri",   owner:"Dean",    spread:"+1.5",  gameTime:"⏳ Fri 9:10 PM CDT", status:"upcoming", abbrs:["MIZZ"] },
-        ],
-        r1bot: [
-          { seed:2,  name:"Purdue",     owner:"Vaine",   spread:"−24.5", gameTime:"⏳ Fri 6:35 PM CDT", status:"upcoming", abbrs:["PUR"] },
-          { seed:15, name:"Queens",     owner:"David",   spread:"+24.5", gameTime:"⏳ Fri 6:35 PM CDT", status:"upcoming", abbrs:["QUC"] },
-        ],
-        r2tbd: true,
-      },
-    ]
+    title:"WEST", sub:"Portland · San Jose", hdr:"west-hdr",
+    r1:[
+      { teams:['ARIZ','LIU'],  time:"⏳ Fri 12:35 PM CDT"      },
+      { teams:['VILL','USU'],  time:"⏳ Fri 3:10 PM CDT"       },
+      { teams:['WIS','HP']                                      },
+      { teams:['ARK','HAW']                                     },
+      { teams:['BYU','TEX']                                     },
+      { teams:['GONZ','KENN']                                   },
+      { teams:['MIA','MIZZ'],  time:"⏳ Fri 9:10 PM CDT"       },
+      { teams:['PUR','QUC'],   time:"⏳ Fri 6:35 PM CDT"       },
+    ],
+    times: {
+      r2: [null, "Sat Mar 21 · 8:45 PM CDT", "Sat Mar 21 · 6:10 PM CDT", null],
+      r3: [],
+      r4: [],
+    },
   },
   {
-    title: "SOUTH", sub: "Tampa · Oklahoma City", hdr: "south-hdr",
-    groups: [
-      {
-        r1top: [
-          { seed:1,  name:"Florida",          owner:"Travis",                   spread:"−35.5", gameTime:"⏳ Fri 8:25 PM CDT", status:"upcoming", abbrs:["FLA"] },
-          { seed:16, name:"Prairie View A&M", owner:"Christian", ownerExtra:"🆕", spread:"+35.5", gameTime:"⏳ Fri 8:25 PM CDT", status:"upcoming", abbrs:["PV","PVAM"] },
-        ],
-        r1bot: [
-          { seed:8,  name:"Clemson", owner:"Gordon",  spread:"+2.5",  gameTime:"⏳ Fri 5:50 PM CDT", status:"upcoming", abbrs:["CLEM"] },
-          { seed:9,  name:"Iowa",    owner:"Payton",  spread:"−2.5",  gameTime:"⏳ Fri 5:50 PM CDT", status:"upcoming", abbrs:["IOWA"] },
-        ],
-        r2tbd: true,
-      },
-      {
-        r1top: [
-          { seed:5,  name:"Vanderbilt", owner:"LeGrand",  spread:"−11.5", score:"78", tag:"✅ COVERED (+10)", status:"winner", abbrs:["VAN"] },
-          { seed:12, name:"McNeese",    owner:"Colby",    spread:"+11.5", score:"68", tag:"❌ ELIM", status:"loser",  abbrs:["MCNS"] },
-        ],
-        r1bot: [
-          { seed:4,  name:"Nebraska",   owner:"Quinn",    spread:"−13.5", score:"76", tag:"✅ COVERED (+29)", status:"winner", abbrs:["NEB"] },
-          { seed:13, name:"Troy",       owner:"Wade",     spread:"+13.5", score:"47", tag:"❌ ELIM", status:"loser",  abbrs:["TROY"] },
-        ],
-        r2: [
-          { seed:5, name:"Vanderbilt", owner:"LeGrand", status:"upcoming", abbrs:["VAN"] },
-          { seed:4, name:"Nebraska",   owner:"Quinn",   status:"upcoming", abbrs:["NEB"] },
-        ],
-        r2Time: "Sat Mar 21 · 7:45 PM CDT",
-      },
-      {
-        r1top: [
-          { seed:6,  name:"N. Carolina", owner:"Paul",   spread:"−2.5",   score:"78",  tag:"❌ ELIM", status:"loser",  abbrs:["UNC"] },
-          { seed:11, name:"VCU",          owner:"David",  spread:"+2.5",   score:"82",  tag:"🎉 UPSET WIN", status:"winner", abbrs:["VCU"] },
-        ],
-        r1bot: [
-          { seed:3,  name:"Illinois",    owner:"Lance",  spread:"−25.5",  score:"105", tag:"✅ COVERED (+35)", status:"winner", abbrs:["ILL"] },
-          { seed:14, name:"Penn",         owner:"Nick",   spread:"+25.5",  score:"70",  tag:"❌ ELIM", status:"loser",  abbrs:["PENN"] },
-        ],
-        r2: [
-          { seed:11, name:"VCU",      owner:"David", status:"upcoming", abbrs:["VCU"] },
-          { seed:3,  name:"Illinois", owner:"Lance", status:"upcoming", abbrs:["ILL"] },
-        ],
-        r2Time: "Sat Mar 21 · 6:50 PM CDT",
-      },
-      {
-        r1top: [
-          { seed:7,  name:"Saint Mary's", owner:"Dean",   spread:"−3.5",   score:"50", tag:"❌ ELIM", status:"loser",  abbrs:["SMC"] },
-          { seed:10, name:"Texas A&M",    owner:"Danny",  spread:"+3.5",   score:"63", tag:"🎉 UPSET WIN", status:"winner", abbrs:["TXAM"] },
-        ],
-        r1bot: [
-          { seed:2,  name:"Houston",      owner:"Matt S", spread:"−22.5",  score:"78", tag:"✅ COVERED (+31)", status:"winner", abbrs:["HOU"] },
-          { seed:15, name:"Idaho",        owner:"Vaine",  spread:"+22.5",  score:"47", tag:"❌ ELIM", status:"loser",  abbrs:["IDHO"] },
-        ],
-        r2: [
-          { seed:2,  name:"Houston",   owner:"Matt S", status:"upcoming", abbrs:["HOU"] },
-          { seed:10, name:"Texas A&M", owner:"Danny",  status:"upcoming", abbrs:["TXAM","TAM"] },
-        ],
-        r2Time: "Sat Mar 21 · 5:10 PM CDT",
-      },
-    ]
+    title:"SOUTH", sub:"Tampa · Oklahoma City", hdr:"south-hdr",
+    r1:[
+      { teams:['FLA','PVAM'],  time:"⏳ Fri 8:25 PM CDT"       },
+      { teams:['CLEM','IOWA'], time:"⏳ Fri 5:50 PM CDT"       },
+      { teams:['VAN','MCNS']                                    },
+      { teams:['NEB','TROY']                                    },
+      { teams:['UNC','VCU']                                     },
+      { teams:['ILL','PENN']                                    },
+      { teams:['SMC','TXAM']                                    },
+      { teams:['HOU','IDHO']                                    },
+    ],
+    times: {
+      r2: [null, "Sat Mar 21 · 7:45 PM CDT", "Sat Mar 21 · 6:50 PM CDT", "Sat Mar 21 · 5:10 PM CDT"],
+      r3: [],
+      r4: [],
+    },
   },
   {
-    title: "MIDWEST", sub: "Buffalo · Philadelphia · St. Louis", hdr: "midwest-hdr",
-    groups: [
-      {
-        r1top: [
-          { seed:1,  name:"Michigan",   owner:"David", ownerExtra:"🆕", spread:"−30.5", score:"101", tag:"⇌ XFER — Matt S didn't cover", status:"winner", abbrs:["MICH"] },
-          { seed:16, name:"Howard",     owner:"David",                  spread:"+30.5", score:"80",  tag:"❌ ELIM", status:"loser",  abbrs:["HOW"] },
-        ],
-        r1bot: [
-          { seed:8,  name:"Georgia",    owner:"Christian",              spread:"−2.5",  score:"77",  tag:"❌ ELIM", status:"loser",  abbrs:["UGA"] },
-          { seed:9,  name:"Saint Louis",owner:"Wade",                   spread:"+2.5",  score:"102", tag:"🎉 UPSET WIN", status:"winner", abbrs:["SLU"] },
-        ],
-        r2: [
-          { seed:1, name:"Michigan",    owner:"David", status:"upcoming", abbrs:["MICH"] },
-          { seed:9, name:"Saint Louis", owner:"Wade",  status:"upcoming", abbrs:["SLU"] },
-        ],
-        r2Time: "Sat Mar 21 · 11:10 AM CDT",
-      },
-      {
-        r1top: [
-          { seed:5,  name:"Texas Tech", owner:"Quinn",   spread:"−7.5",  gameTime:"⏳ Fri 11:40 AM CDT", status:"upcoming", abbrs:["TTU"] },
-          { seed:12, name:"Akron",       owner:"Gordon",  spread:"+7.5",  gameTime:"⏳ Fri 11:40 AM CDT", status:"upcoming", abbrs:["AKR"] },
-        ],
-        r1bot: [
-          { seed:4,  name:"Alabama",    owner:"Travis",  spread:"−12.5", gameTime:"⏳ Fri 2:15 PM CDT",  status:"upcoming", abbrs:["ALA"] },
-          { seed:13, name:"Hofstra",    owner:"Colby",   spread:"+12.5", gameTime:"⏳ Fri 2:15 PM CDT",  status:"upcoming", abbrs:["HOF"] },
-        ],
-        r2tbd: true,
-      },
-      {
-        r1top: [
-          { seed:6,  name:"Tennessee",   owner:"Paul",    spread:"−8.5",  gameTime:"⏳ Fri 3:25 PM CDT",  status:"upcoming", abbrs:["TENN"] },
-          { seed:11, name:"Miami (OH)",  owner:"Danny",   spread:"+8.5",  gameTime:"⏳ Fri 3:25 PM CDT",  status:"upcoming", abbrs:["M-OH"] },
-        ],
-        r1bot: [
-          { seed:3,  name:"Virginia",    owner:"Payton",  spread:"−25.5", gameTime:"⏳ Fri 12:50 PM CDT", status:"upcoming", abbrs:["UVA"] },
-          { seed:14, name:"Wright State",owner:"Nick",    spread:"+25.5", gameTime:"⏳ Fri 12:50 PM CDT", status:"upcoming", abbrs:["WRST"] },
-        ],
-        r2tbd: true,
-      },
-      {
-        r1top: [
-          { seed:7,  name:"Kentucky",      owner:"Lance",    spread:"−3.5",  gameTime:"⏳ Fri 11:15 AM CDT", status:"upcoming", abbrs:["UK"] },
-          { seed:10, name:"Santa Clara",   owner:"Dean",     spread:"+3.5",  gameTime:"⏳ Fri 11:15 AM CDT", status:"upcoming", abbrs:["SCU"] },
-        ],
-        r1bot: [
-          { seed:2,  name:"Iowa State",    owner:"Vaine",    spread:"−23.5", gameTime:"⏳ Fri 1:50 PM CDT",  status:"upcoming", abbrs:["ISU"] },
-          { seed:15, name:"Tennessee St.", owner:"Legrande", spread:"+23.5", gameTime:"⏳ Fri 1:50 PM CDT",  status:"upcoming", abbrs:["TNST","TSU"] },
-        ],
-        r2tbd: true,
-      },
-    ]
+    title:"MIDWEST", sub:"Buffalo · Philadelphia · St. Louis", hdr:"midwest-hdr",
+    r1:[
+      { teams:['MICH','HOW']                                    },
+      { teams:['UGA','SLU']                                     },
+      { teams:['TTU','AKR'],   time:"⏳ Fri 11:40 AM CDT"      },
+      { teams:['ALA','HOF'],   time:"⏳ Fri 2:15 PM CDT"       },
+      { teams:['TENN','MOH'],  time:"⏳ Fri 3:25 PM CDT"       },
+      { teams:['UVA','WRST'],  time:"⏳ Fri 12:50 PM CDT"      },
+      { teams:['UK','SCU'],    time:"⏳ Fri 11:15 AM CDT"      },
+      { teams:['ISU','TNST'],  time:"⏳ Fri 1:50 PM CDT"       },
+    ],
+    times: {
+      r2: ["Sat Mar 21 · 11:10 AM CDT", null, null, null],
+      r3: [],
+      r4: [],
+    },
   },
 ];
 
-// ─────────────────────────────────────────────
-// RENDER
-// ─────────────────────────────────────────────
-function render() {
-  document.getElementById('bracket').innerHTML = REGIONS.map(r =>
-    regionHtml(r.title, r.sub, r.hdr, r.groups)
-  ).join('');
+// ─────────────────────────────────────────────────────────────
+// FINAL FOUR TIMES
+// Teams auto-advance from Elite 8 results (REGIONS order:
+// East vs West = semifinal 1, South vs Midwest = semifinal 2).
+// Just add game times when the bracket is set.
+// ─────────────────────────────────────────────────────────────
+const FF_TIMES = {
+  ff:    [null, null],  // [semifinal1_time, semifinal2_time]
+  champ: null,          // championship time
+};
+
+// ─────────────────────────────────────────────────────────────
+// AUTO-ADVANCEMENT
+// Looks up the winner of a matchup from RESULTS, then builds
+// the next round's matchup array automatically.
+// You never need to type team keys into future-round arrays.
+// ─────────────────────────────────────────────────────────────
+
+function getWinner(matchup, resKey) {
+  if (!matchup) return null;
+  for (const key of matchup.teams) {
+    if (key && RESULTS[resKey]?.[key]?.status === 'winner') return key;
+  }
+  return null;
 }
 
-// ─────────────────────────────────────────────
-// LIVE SPREAD OVERLAY
-// Fetches ESPN scoreboard for Round 2 dates and
-// injects live point spreads into R2 team slots.
-// ─────────────────────────────────────────────
+// Build a round's matchup array from the previous round's results.
+// Each consecutive pair of prevMatchups produces one next-round slot.
+// teams may be null (TBD) if that R1/R2 game isn't complete yet.
+function buildRound(prevMatchups, prevResKey, times = []) {
+  const out = [];
+  for (let i = 0; i < prevMatchups.length; i += 2) {
+    const w0   = getWinner(prevMatchups[i],   prevResKey);
+    const w1   = getWinner(prevMatchups[i+1], prevResKey);
+    const time = times[i / 2] || '';
+    out.push({ teams: [w0, w1], time });
+  }
+  return out;
+}
+
+// Show a round only if at least one team is known or a time is set.
+function roundHasData(matchups) {
+  return matchups.some(m => m && (m.teams[0] || m.teams[1] || m.time));
+}
+
+// ─────────────────────────────────────────────────────────────
+// RENDERERS
+// ─────────────────────────────────────────────────────────────
+
+// resKey: which RESULTS bucket to look up ('r1','r2','r3','r4','ff','ch')
+function teamSlotHtml(key, resKey, showSpread, gameTime) {
+  const team = T[key];
+  if (!team) {
+    return `<div class="team-slot upcoming" style="min-height:${BASE_H}px;">
+      <div class="seed-row"><span class="team-name" style="color:#334155">TBD</span></div></div>`;
+  }
+  const res    = RESULTS[resKey]?.[key];
+  const status = res?.status || 'upcoming';
+  const spread = showSpread ? (team.r1Spread || '') : '';
+
+  let body = '';
+  if (res?.score != null) {
+    body = `<div class="score-row">${res.score}<span class="ftag">${res.tag||''}</span></div>`;
+  } else if (status === 'upcoming' && gameTime) {
+    body = `<div class="game-time">${gameTime}</div>`;
+  }
+
+  return `
+    <div class="team-slot ${status}" data-abbrs="${team.abbrs.join(',')}" style="min-height:${BASE_H}px;">
+      <div class="seed-row"><span class="seed-num">${team.seed}</span><span class="team-name">${team.name}</span></div>
+      <div class="owner-row">${ownerPill(team.owner, team.ownerExtra||'')}${spread ? `<span class="spread">${spread}</span>` : ''}</div>
+      ${body}
+    </div>`;
+}
+
+function matchupCardHtml(matchup, roundIdx, resKey) {
+  if (!matchup || (!matchup.teams[0] && !matchup.teams[1])) {
+    return `<div class="matchup tbd" style="width:100%;"><div class="tbd-inner">⏳ TBD<br>pending</div></div>`;
+  }
+  const { teams, time } = matchup;
+  const isAdv = roundIdx > 0;
+  const labels = ['','ROUND 2','SWEET 16','ELITE 8','FINAL FOUR','CHAMPIONSHIP'];
+
+  // Look up game time from ESPN fetch if not hardcoded
+  let displayTime = time || '';
+  if (!displayTime && teams[0] && teams[1]) {
+    const abbrs0 = T[teams[0]]?.abbrs || [];
+    const abbrs1 = T[teams[1]]?.abbrs || [];
+    for (const a of abbrs0) {
+      for (const b of abbrs1) {
+        const key = [a,b].sort().join('|');
+        if (GAME_TIMES[key]) { displayTime = GAME_TIMES[key]; break; }
+      }
+      if (displayTime) break;
+    }
+  }
+
+  const meta = isAdv
+    ? `<div class="r2-meta"><div class="r2-label">${labels[roundIdx]||''}</div><div class="r2-time">${displayTime}</div></div>`
+    : '';
+  const showSpread = roundIdx === 0;
+  const slotTime = (!isAdv && !RESULTS[resKey]?.[teams[0]]) ? (displayTime) : '';
+
+  return `
+    <div class="matchup${isAdv?' adv':''}" style="width:100%;">
+      ${meta}
+      ${teamSlotHtml(teams[0], resKey, showSpread, slotTime)}
+      ${teamSlotHtml(teams[1], resKey, showSpread, '')}
+    </div>`;
+}
+
+function roundColHtml(matchups, roundIdx, resKey, labelOverride) {
+  const cH = containerH(roundIdx);
+  const labels = ['ROUND 1','ROUND 2','SWEET 16','ELITE 8','FINAL FOUR','CHAMP'];
+  const label  = labelOverride || labels[roundIdx] || `RD ${roundIdx+1}`;
+  let html = `<div style="width:${COL_W}px;flex-shrink:0;">
+    <div class="round-label-bar">${label}</div>`;
+  for (const m of matchups) {
+    html += `<div style="height:${cH}px;display:flex;align-items:center;padding:2px 0;">${matchupCardHtml(m, roundIdx, resKey)}</div>`;
+  }
+  return html + `</div>`;
+}
+
+function connectorColHtml(numConnectors, toRoundIdx) {
+  const totalH = containerH(toRoundIdx);
+  let html = `<div style="width:${CONN_W}px;flex-shrink:0;"><div style="height:${LABEL_H}px;"></div>`;
+  for (let i = 0; i < numConnectors; i++) {
+    html += `<div style="height:${totalH}px;display:flex;flex-direction:column;">
+      <div style="flex:1;border-right:2px solid rgba(255,255,255,0.18);border-bottom:2px solid rgba(255,255,255,0.18);border-bottom-right-radius:2px;"></div>
+      <div style="flex:1;border-right:2px solid rgba(255,255,255,0.18);"></div>
+    </div>`;
+  }
+  return html + `</div>`;
+}
+
+// Get the Elite 8 winner for a given region index (fully derived from RESULTS)
+function getRegionWinner(regionIdx) {
+  const r = REGIONS[regionIdx];
+  const r2 = buildRound(r.r1, 'r1', r.times.r2);
+  const r3 = buildRound(r2,   'r2', r.times.r3);
+  const r4 = buildRound(r3,   'r3', r.times.r4);
+  return r4.length ? getWinner(r4[0], 'r4') : null;
+}
+
+function regionHtml(region) {
+  const r1 = region.r1;
+  const r2 = buildRound(r1, 'r1', region.times.r2);
+  const r3 = buildRound(r2, 'r2', region.times.r3);
+  const r4 = buildRound(r3, 'r3', region.times.r4);
+
+  const rounds = [
+    [r1, 'r1'],
+    ...(roundHasData(r2) ? [[r2, 'r2']] : []),
+    ...(roundHasData(r3) ? [[r3, 'r3']] : []),
+    ...(roundHasData(r4) ? [[r4, 'r4']] : []),
+  ];
+
+  let body = '';
+  for (let ri = 0; ri < rounds.length; ri++) {
+    const [matchups, resKey] = rounds[ri];
+    body += roundColHtml(matchups, ri, resKey);
+    if (ri < rounds.length - 1) {
+      body += connectorColHtml(rounds[ri+1][0].length, ri+1);
+    }
+  }
+
+  return `
+    <div class="region">
+      <div class="region-hdr ${region.hdr}"><span class="name">${region.title}</span><span class="sub">${region.sub}</span></div>
+      <div class="bracket-body">${body}</div>
+    </div>`;
+}
+
+function renderFinalFour() {
+  // East vs West, South vs Midwest — standard tournament seeding
+  const ffMatchups = [
+    { teams:[getRegionWinner(0), getRegionWinner(1)], time: FF_TIMES.ff[0]||'' },
+    { teams:[getRegionWinner(2), getRegionWinner(3)], time: FF_TIMES.ff[1]||'' },
+  ];
+  const champMatchup = {
+    teams:[getWinner(ffMatchups[0],'ff'), getWinner(ffMatchups[1],'ff')],
+    time: FF_TIMES.champ||''
+  };
+
+  const hasFf    = ffMatchups.some(m => m.teams[0] || m.teams[1] || m.time);
+  const hasChamp = champMatchup.teams[0] || champMatchup.teams[1] || champMatchup.time;
+  if (!hasFf) return;
+
+  document.getElementById('ff-section').style.display = 'block';
+  let html = roundColHtml(ffMatchups, 0, 'ff', 'FINAL FOUR');
+  if (hasChamp) {
+    html += connectorColHtml(1, 1);
+    html += roundColHtml([champMatchup], 1, 'ch', 'CHAMPIONSHIP');
+  }
+  document.getElementById('ff-bracket').innerHTML = html;
+}
+
+function render() {
+  document.getElementById('bracket').innerHTML = REGIONS.map(regionHtml).join('');
+  renderFinalFour();
+}
+
+// ─────────────────────────────────────────────────────────────
+// GAME TIMES FROM ESPN
+// Fetches scheduled start times for all upcoming tournament games.
+// Stored as GAME_TIMES keyed by sorted abbr pair "A|B".
+// matchupCardHtml uses this as fallback when no time is hardcoded.
+// ─────────────────────────────────────────────────────────────
+const GAME_TIMES = {};  // "ABBR1|ABBR2" → formatted time string
+
+async function fetchGameTimes() {
+  const dates = [
+    '20260320','20260321','20260322','20260323','20260324',
+    '20260327','20260328','20260329','20260330',
+    '20260404','20260405','20260406','20260407',
+  ];
+  for (const date of dates) {
+    try {
+      const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?dates=${date}&groups=50&limit=100`);
+      if (!res.ok) continue;
+      const data = await res.json();
+      for (const ev of (data.events || [])) {
+        const comp = ev.competitions?.[0];
+        if (!comp) continue;
+        const abbrs = (comp.competitors||[]).map(t => t.team?.abbreviation?.toUpperCase()).filter(Boolean);
+        if (abbrs.length < 2) continue;
+        const key = abbrs.slice().sort().join('|');
+        if (GAME_TIMES[key]) continue; // already have it
+        // Parse the date into a readable string
+        const d = new Date(ev.date || comp.date);
+        if (isNaN(d)) continue;
+        const dayStr = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+        const timeStr = d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZoneName:'short'});
+        GAME_TIMES[key] = `${dayStr} · ${timeStr}`;
+      }
+    } catch(e) { /* silent */ }
+  }
+}
+// Fetches ESPN odds for the full tournament window and injects
+// spread pills into any R2+ team slot that doesn't have one yet.
+// Runs on every refresh cycle so moving lines stay current.
+// ─────────────────────────────────────────────────────────────
 async function fetchSpreads() {
-  // Fetch today AND tomorrow to catch all R2 lines as they post
-  const dates = ['20260320', '20260321', '20260322'];
+  // Cover the full tournament: R2 (Mar 21-22), S16 (Mar 27-28), E8 (Mar 29-30), FF/Champ (Apr 4-7)
+  const dates = [
+    '20260320','20260321','20260322','20260323','20260324',
+    '20260327','20260328','20260329','20260330',
+    '20260404','20260405','20260406','20260407',
+  ];
   const spreadMap = {};
 
   for (const date of dates) {
     try {
-      const res = await fetch(
-        `https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?dates=${date}&groups=50&limit=100`
-      );
+      const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?dates=${date}&groups=50&limit=100`);
       if (!res.ok) continue;
       const data = await res.json();
-
       for (const ev of (data.events || [])) {
         const comp = ev.competitions?.[0];
-        if (!comp) continue;
-
-        // Try to get odds — ESPN returns an array of providers
-        const odds = comp.odds?.[0];
+        const odds = comp?.odds?.[0];
         if (!odds || odds.spread == null) continue;
-
-        const competitors = comp.competitors || [];
-        const home = competitors.find(t => t.homeAway === 'home');
-        const away = competitors.find(t => t.homeAway === 'away');
+        const spread = Math.abs(parseFloat(odds.spread));
+        if (isNaN(spread)) continue;
+        const home = comp.competitors?.find(t => t.homeAway === 'home');
+        const away = comp.competitors?.find(t => t.homeAway === 'away');
         if (!home || !away) continue;
-
-        const homeAbbr = home.team?.abbreviation?.toUpperCase();
-        const awayAbbr = away.team?.abbreviation?.toUpperCase();
-        const rawSpread = Math.abs(parseFloat(odds.spread));
-        if (!homeAbbr || isNaN(rawSpread)) continue;
-
-        // Determine which team is favored
-        const homeFavored = odds.homeTeamOdds?.favorite === true
-          || (odds.homeTeamOdds?.favorite == null && odds.details?.startsWith(home.team?.abbreviation));
-
-        const homeSpread = homeFavored ? `−${rawSpread}` : `+${rawSpread}`;
-        const awaySpread = homeFavored ? `+${rawSpread}` : `−${rawSpread}`;
-
-        spreadMap[homeAbbr] = homeSpread;
-        if (awayAbbr) spreadMap[awayAbbr] = awaySpread;
+        const ha = home.team?.abbreviation?.toUpperCase();
+        const aa = away.team?.abbreviation?.toUpperCase();
+        const homeFav = odds.homeTeamOdds?.favorite === true;
+        if (ha) spreadMap[ha] = homeFav ? `−${spread}` : `+${spread}`;
+        if (aa) spreadMap[aa] = homeFav ? `+${spread}` : `−${spread}`;
       }
-    } catch(e) {
-      console.warn(`Spread fetch failed for ${date}:`, e);
-    }
+    } catch(e) { /* silent fail per date */ }
   }
 
-  // Inject spreads into R2 team slots that don't already have one
-  const r2Slots = document.querySelectorAll('.matchup.r2 .team-slot[data-abbrs]');
-  for (const slot of r2Slots) {
+  // Inject into adv (R2+) slots and Final Four slots
+  document.querySelectorAll('.matchup.adv .team-slot[data-abbrs]').forEach(slot => {
     const abbrs = slot.dataset.abbrs.split(',').filter(Boolean);
     for (const abbr of abbrs) {
-      const spread = spreadMap[abbr.toUpperCase()];
-      if (spread) {
-        const ownerRow = slot.querySelector('.owner-row');
-        if (ownerRow && !ownerRow.querySelector('.spread')) {
-          ownerRow.insertAdjacentHTML('beforeend',
-            `<span class="spread">${spread}</span>`);
+      const sp = spreadMap[abbr.toUpperCase()];
+      if (sp) {
+        const row = slot.querySelector('.owner-row');
+        if (row && !row.querySelector('.spread')) {
+          row.insertAdjacentHTML('beforeend', `<span class="spread">${sp}</span>`);
         }
         break;
       }
     }
-  }
+  });
 }
 
-// ─────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
 // LIVE SCORE OVERLAY
-// ─────────────────────────────────────────────
+// Fetches ESPN's live scoreboard and overlays scores on
+// team slots by matching abbreviations. Hardcoded final
+// results in RESULTS are never overwritten (they use winner/loser
+// status classes, not the 'upcoming' class the overlay checks).
+// ─────────────────────────────────────────────────────────────
 let refreshInterval;
 const REFRESH_SECONDS = 60;
 let countdown = REFRESH_SECONDS;
@@ -536,17 +712,14 @@ async function fetchScores() {
   const statusEl = document.getElementById('status-text');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinning">↻</span> Updating…';
+
   try {
-    const res = await fetch(
-      'https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?limit=100'
-    );
+    const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?limit=100');
     if (!res.ok) throw new Error(`ESPN ${res.status}`);
     const data = await res.json();
-    const events = data.events || [];
 
-    // Build abbr → game lookup
     const gameMap = {};
-    for (const ev of events) {
+    for (const ev of (data.events || [])) {
       const comp = ev.competitions?.[0];
       if (!comp) continue;
       const statusName = comp.status?.type?.name || '';
@@ -554,68 +727,64 @@ async function fetchScores() {
       const period = comp.status?.period || '';
       for (const team of (comp.competitors || [])) {
         const abbr = team.team?.abbreviation?.toUpperCase();
-        if (abbr) gameMap[abbr] = { statusName, clock, period,
-          score: parseInt(team.score, 10) || 0,
-          opponentScore: (comp.competitors||[]).find(t => t.team?.abbreviation?.toUpperCase() !== abbr)
-            ? parseInt((comp.competitors||[]).find(t => t.team?.abbreviation?.toUpperCase() !== abbr).score, 10) || 0
-            : 0
+        if (!abbr) continue;
+        const opp = comp.competitors.find(t => t.team?.abbreviation?.toUpperCase() !== abbr);
+        gameMap[abbr] = {
+          statusName, clock, period,
+          score:    parseInt(team.score, 10) || 0,
+          oppScore: opp ? parseInt(opp.score, 10) || 0 : 0,
         };
       }
     }
 
-    // Overlay live scores on team slots
-    const slots = document.querySelectorAll('.team-slot[data-abbrs]');
-    for (const slot of slots) {
+    document.querySelectorAll('.team-slot[data-abbrs]').forEach(slot => {
       const abbrs = slot.dataset.abbrs.split(',').filter(Boolean);
       for (const abbr of abbrs) {
         const g = gameMap[abbr.toUpperCase()];
         if (!g) continue;
         if (g.statusName === 'STATUS_IN_PROGRESS') {
           slot.classList.add('live');
-          const scoreDiv = slot.querySelector('.score-row') || slot.querySelector('.game-time');
-          if (scoreDiv) {
-            scoreDiv.outerHTML = `<div class="score-row live-score"><span class="live-dot"></span>${g.score}–${g.opponentScore}<span class="live-clock"> ${g.clock} P${g.period}</span></div>`;
-          }
+          const el = slot.querySelector('.score-row, .game-time');
+          if (el) el.outerHTML = `<div class="score-row live-score"><span class="live-dot"></span>${g.score}–${g.oppScore}<span class="live-clock"> ${g.clock} P${g.period}</span></div>`;
         } else if (g.statusName === 'STATUS_FINAL' && slot.classList.contains('upcoming')) {
-          const scoreDiv = slot.querySelector('.game-time');
-          if (scoreDiv) {
-            scoreDiv.outerHTML = `<div class="score-row">${g.score}<span class="ftag">FINAL</span></div>`;
-          }
+          const el = slot.querySelector('.game-time');
+          if (el) el.outerHTML = `<div class="score-row">${g.score}<span class="ftag">FINAL</span></div>`;
         }
         break;
       }
-    }
+    });
 
-    // Also refresh spreads on each cycle (lines can move)
     await fetchSpreads();
+    await fetchGameTimes();
+    render(); // re-render with updated game times
 
     const now = new Date();
     statusEl.textContent = `Updated ${now.toLocaleTimeString()} · auto-refresh in ${REFRESH_SECONDS}s`;
-    document.getElementById('timestamp').textContent = `Last Updated: ${now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})} · ${now.toLocaleTimeString()}`;
+    document.getElementById('timestamp').textContent =
+      `Last Updated: ${now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})} · ${now.toLocaleTimeString()}`;
     countdown = REFRESH_SECONDS;
   } catch(e) {
     statusEl.textContent = `⚠ Score fetch failed: ${e.message}`;
   }
+
   btn.disabled = false;
   btn.innerHTML = '↻ Refresh Scores';
 }
 
-// Countdown ticker
 function startCountdown() {
   clearInterval(refreshInterval);
   refreshInterval = setInterval(() => {
     countdown--;
-    const statusEl = document.getElementById('status-text');
+    const el = document.getElementById('status-text');
     if (countdown <= 0) {
       fetchScores();
     } else {
-      const existing = statusEl.textContent;
-      statusEl.textContent = existing.replace(/auto-refresh in \d+s/, `auto-refresh in ${countdown}s`);
+      el.textContent = el.textContent.replace(/auto-refresh in \d+s/, `auto-refresh in ${countdown}s`);
     }
   }, 1000);
 }
 
-// Init
+// ── Init ──────────────────────────────────────────────────────
 render();
 fetchScores().then(startCountdown);
 </script>

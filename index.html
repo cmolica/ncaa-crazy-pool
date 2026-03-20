@@ -452,24 +452,54 @@ function roundHasData(matchups) {
 }
 
 // ─────────────────────────────────────────────────────────────
+// LIVE DATA MAPS  (populated by fetch functions, read at render time)
+// ─────────────────────────────────────────────────────────────
+const GAME_SPREADS = {};  // ABBR → "−8.5" or "+8.5"
+const LIVE_SCORES  = {};  // ABBR → { status, score, oppScore, clock, period }
+
+// ─────────────────────────────────────────────────────────────
 // RENDERERS
 // ─────────────────────────────────────────────────────────────
 
+function spreadForTeam(key) {
+  const abbrs = T[key]?.abbrs || [];
+  for (const a of abbrs) {
+    if (GAME_SPREADS[a.toUpperCase()]) return GAME_SPREADS[a.toUpperCase()];
+  }
+  return '';
+}
+
+function liveDataForTeam(key) {
+  const abbrs = T[key]?.abbrs || [];
+  for (const a of abbrs) {
+    if (LIVE_SCORES[a.toUpperCase()]) return LIVE_SCORES[a.toUpperCase()];
+  }
+  return null;
+}
+
 // resKey: which RESULTS bucket to look up ('r1','r2','r3','r4','ff','ch')
-function teamSlotHtml(key, resKey, showSpread, gameTime) {
+function teamSlotHtml(key, resKey, _unused, gameTime) {
   const team = T[key];
   if (!team) {
     return `<div class="team-slot upcoming" style="min-height:${BASE_H}px;">
       <div class="seed-row"><span class="team-name" style="color:#334155">TBD</span></div></div>`;
   }
   const res    = RESULTS[resKey]?.[key];
-  const status = res?.status || 'upcoming';
-  const spread = showSpread ? (team.r1Spread || '') : '';
+  const live   = liveDataForTeam(key);
+  const status = res?.status || (live?.status === 'live' ? 'live' : 'upcoming');
+
+  // Spread: always show — R1 hardcoded first, then live ESPN map for R2+
+  const spread = team.r1Spread || spreadForTeam(key);
 
   let body = '';
   if (res?.score != null) {
+    // Hardcoded final result takes priority
     body = `<div class="score-row">${res.score}<span class="ftag">${res.tag||''}</span></div>`;
-  } else if (status === 'upcoming' && gameTime) {
+  } else if (live?.status === 'live') {
+    body = `<div class="score-row live-score"><span class="live-dot"></span>${live.score}–${live.oppScore}<span class="live-clock"> ${live.clock} P${live.period}</span></div>`;
+  } else if (live?.status === 'final') {
+    body = `<div class="score-row">${live.score}<span class="ftag">FINAL</span></div>`;
+  } else if (gameTime) {
     body = `<div class="game-time">${gameTime}</div>`;
   }
 
@@ -506,14 +536,13 @@ function matchupCardHtml(matchup, roundIdx, resKey) {
   const meta = isAdv
     ? `<div class="r2-meta"><div class="r2-label">${labels[roundIdx]||''}</div><div class="r2-time">${displayTime}</div></div>`
     : '';
-  const showSpread = roundIdx === 0;
   const slotTime = (!isAdv && !RESULTS[resKey]?.[teams[0]]) ? (displayTime) : '';
 
   return `
     <div class="matchup${isAdv?' adv':''}" style="width:100%;">
       ${meta}
-      ${teamSlotHtml(teams[0], resKey, showSpread, slotTime)}
-      ${teamSlotHtml(teams[1], resKey, showSpread, '')}
+      ${teamSlotHtml(teams[0], resKey, true, slotTime)}
+      ${teamSlotHtml(teams[1], resKey, true, '')}
     </div>`;
 }
 
@@ -644,19 +673,15 @@ async function fetchGameTimes() {
     } catch(e) { /* silent */ }
   }
 }
-// Fetches ESPN odds for the full tournament window and injects
-// spread pills into any R2+ team slot that doesn't have one yet.
-// Runs on every refresh cycle so moving lines stay current.
+// ─────────────────────────────────────────────────────────────
+// LIVE SPREAD FETCH — populates GAME_SPREADS map
 // ─────────────────────────────────────────────────────────────
 async function fetchSpreads() {
-  // Cover the full tournament: R2 (Mar 21-22), S16 (Mar 27-28), E8 (Mar 29-30), FF/Champ (Apr 4-7)
   const dates = [
     '20260320','20260321','20260322','20260323','20260324',
     '20260327','20260328','20260329','20260330',
     '20260404','20260405','20260406','20260407',
   ];
-  const spreadMap = {};
-
   for (const date of dates) {
     try {
       const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?dates=${date}&groups=50&limit=100`);
@@ -674,34 +699,15 @@ async function fetchSpreads() {
         const ha = home.team?.abbreviation?.toUpperCase();
         const aa = away.team?.abbreviation?.toUpperCase();
         const homeFav = odds.homeTeamOdds?.favorite === true;
-        if (ha) spreadMap[ha] = homeFav ? `−${spread}` : `+${spread}`;
-        if (aa) spreadMap[aa] = homeFav ? `+${spread}` : `−${spread}`;
+        if (ha) GAME_SPREADS[ha] = homeFav ? `−${spread}` : `+${spread}`;
+        if (aa) GAME_SPREADS[aa] = homeFav ? `+${spread}` : `−${spread}`;
       }
-    } catch(e) { /* silent fail per date */ }
+    } catch(e) { /* silent */ }
   }
-
-  // Inject into adv (R2+) slots and Final Four slots
-  document.querySelectorAll('.matchup.adv .team-slot[data-abbrs]').forEach(slot => {
-    const abbrs = slot.dataset.abbrs.split(',').filter(Boolean);
-    for (const abbr of abbrs) {
-      const sp = spreadMap[abbr.toUpperCase()];
-      if (sp) {
-        const row = slot.querySelector('.owner-row');
-        if (row && !row.querySelector('.spread')) {
-          row.insertAdjacentHTML('beforeend', `<span class="spread">${sp}</span>`);
-        }
-        break;
-      }
-    }
-  });
 }
 
 // ─────────────────────────────────────────────────────────────
-// LIVE SCORE OVERLAY
-// Fetches ESPN's live scoreboard and overlays scores on
-// team slots by matching abbreviations. Hardcoded final
-// results in RESULTS are never overwritten (they use winner/loser
-// status classes, not the 'upcoming' class the overlay checks).
+// LIVE SCORE FETCH — populates LIVE_SCORES map, then re-renders
 // ─────────────────────────────────────────────────────────────
 let refreshInterval;
 const REFRESH_SECONDS = 60;
@@ -714,49 +720,40 @@ async function fetchScores() {
   btn.innerHTML = '<span class="spinning">↻</span> Updating…';
 
   try {
+    // 1. Fetch live/final scores from today's scoreboard
     const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?limit=100');
     if (!res.ok) throw new Error(`ESPN ${res.status}`);
     const data = await res.json();
 
-    const gameMap = {};
     for (const ev of (data.events || [])) {
       const comp = ev.competitions?.[0];
       if (!comp) continue;
       const statusName = comp.status?.type?.name || '';
-      const clock = comp.status?.displayClock || '';
-      const period = comp.status?.period || '';
+      const clock      = comp.status?.displayClock || '';
+      const period     = comp.status?.period || '';
+      const isLive     = statusName === 'STATUS_IN_PROGRESS';
+      const isFinal    = statusName === 'STATUS_FINAL';
+      if (!isLive && !isFinal) continue;
+
       for (const team of (comp.competitors || [])) {
         const abbr = team.team?.abbreviation?.toUpperCase();
         if (!abbr) continue;
         const opp = comp.competitors.find(t => t.team?.abbreviation?.toUpperCase() !== abbr);
-        gameMap[abbr] = {
-          statusName, clock, period,
+        LIVE_SCORES[abbr] = {
+          status:   isLive ? 'live' : 'final',
           score:    parseInt(team.score, 10) || 0,
-          oppScore: opp ? parseInt(opp.score, 10) || 0 : 0,
+          oppScore: opp ? (parseInt(opp.score, 10) || 0) : 0,
+          clock, period,
         };
       }
     }
 
-    document.querySelectorAll('.team-slot[data-abbrs]').forEach(slot => {
-      const abbrs = slot.dataset.abbrs.split(',').filter(Boolean);
-      for (const abbr of abbrs) {
-        const g = gameMap[abbr.toUpperCase()];
-        if (!g) continue;
-        if (g.statusName === 'STATUS_IN_PROGRESS') {
-          slot.classList.add('live');
-          const el = slot.querySelector('.score-row, .game-time');
-          if (el) el.outerHTML = `<div class="score-row live-score"><span class="live-dot"></span>${g.score}–${g.oppScore}<span class="live-clock"> ${g.clock} P${g.period}</span></div>`;
-        } else if (g.statusName === 'STATUS_FINAL' && slot.classList.contains('upcoming')) {
-          const el = slot.querySelector('.game-time');
-          if (el) el.outerHTML = `<div class="score-row">${g.score}<span class="ftag">FINAL</span></div>`;
-        }
-        break;
-      }
-    });
-
+    // 2. Fetch spreads and game times into their maps
     await fetchSpreads();
     await fetchGameTimes();
-    render(); // re-render with updated game times
+
+    // 3. Re-render everything from the updated maps — one pass, no DOM patching
+    render();
 
     const now = new Date();
     statusEl.textContent = `Updated ${now.toLocaleTimeString()} · auto-refresh in ${REFRESH_SECONDS}s`;
